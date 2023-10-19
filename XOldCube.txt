@@ -1,0 +1,157 @@
+//class Test {
+//  OpenSimplexNoise opnoise;
+//  Surface[] faces ;
+
+//  ArrayList<PVector> bounds;
+//  Test(int s, float x) {
+//    opnoise= new OpenSimplexNoise();
+//    faces = new Surface[6];
+//    PVector offset = new PVector(0, 0, 0);
+
+
+
+//    faces[0] = new Surface(s, x, x, offset, 0);
+
+//    faces[1] = new Surface(s, x, x, offset, 1);
+
+//    faces[2] = new Surface(s, x, x, offset, 2);
+
+//    offset.x = x;
+
+//    faces[3] = new Surface(s, x, x, offset, 0);
+
+//    offset.x =0;
+//    offset.z = x;
+
+//    faces[4] = new Surface(s, x, x, offset, 1);
+
+//    offset.z = 0;
+//    offset.y = x;
+
+//    faces[5] = new Surface(s, x, x, offset, 2);
+
+//    initBounds();
+//  }
+//  void initBounds() {
+//    bounds = new ArrayList<PVector>();
+//    for (int k =0; k<6; k++) {
+
+
+//      Surface fn = faces[k];
+
+//      for (int i = 0; i< fn.rows; i++) {
+
+//        for (int j = 0; j< fn.cols; j++) {
+//          PVector p = fn.points[i][j];
+//          if (i== 0 || j == 0|| i == fn.rows-1|| j == fn.cols -1) {
+//            Boolean found= false;
+//            for (int a = 0; a< bounds.size(); a++) {
+//              PVector p0 = bounds.get(a);
+//              if ((int) p0.x == p.x && (int) p0.y == p.y && (int) p0.z == p.z ) {
+//                p = p0;
+//                found = true;
+//                break;
+//              }
+//            }
+//            if (!found) {
+//              bounds.add(p);
+//              stroke(0, 255, 0);
+//              strokeWeight(10);
+//              point(p.x, p.y, p.z);
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//  void update(float z) {
+
+
+//    float inc= 0.3;
+//    float x = 0;
+//    for (int i = 1; i< faces[0].rows-1; i++) {
+//      float y = 0;
+//      for (int j = 1; j< faces[0].cols-1; j++) {
+//        PVector v0 = faces[0].points[i][j];
+//        PVector v1 = faces[1].points[i][j];
+//        PVector v2 = faces[2].points[i][j];
+//        PVector v3 = faces[3].points[i][j];
+//        PVector v4 = faces[4].points[i][j];
+//        //PVector v5 = faces[5].points[i][j];
+//        float n = (float) opnoise.eval(x, y, z);
+//        n = map(n, -1, 1, 0, 35);
+//        v0.x-=n;
+//        v3.x+=n;
+
+//        v4.z+=n;
+//        v1.z-=n;
+
+//        v2.y-=n;
+//        v5.y+=n;
+//        y+=inc;
+//      }
+//      x+=inc;
+//    }
+//  }
+//  void display() {
+//colorMode(HSB);
+ 
+//    for (int k =0; k<6; k++) {
+
+//      fill(180, 40, 70);
+//      Surface fn = faces[k];
+
+//      for (int i = 0; i< fn.rows-1; i++) {
+//        beginShape(TRIANGLE_STRIP);
+//        for (int j = 0; j< fn.cols; j++) {
+//          float n=255/2;
+
+
+//          PVector p0 = fn.points[i][j];
+//          PVector p1 = fn.points[i+1][j];
+//           fill(33); 
+//          switch(k) {
+//          case 0:
+            
+//           n = map(p0.x, fn.initial.x, fn.initial.x-35,255,50);
+          
+          
+
+
+//            break;
+//          case 1:
+//          n = map(p0.z, fn.initial.z, fn.initial.z-35,255,50);
+
+//            break;
+//          case 2:
+//          n = map(p0.y, fn.initial.y, fn.initial.y-35,255,50);
+           
+//            break;
+//          case 3:
+//          n = map(p0.x, fn.initial.x, fn.initial.x+35,0,255);
+          
+//            break;
+//          case 4:
+//        n = map(p0.z, fn.initial.y, fn.initial.y+35,0,255);
+       
+//        fill(n);
+//            break;
+//          case 5:
+//           n = map(p0.y, fn.initial.y, fn.initial.y+35,0,255);
+//            break;
+//          }
+//          //fill(255/1.5,n,129);
+//          vertex(p0.x, p0.y, p0.z);
+
+
+
+
+//          vertex(p1.x, p1.y, p1.z);
+          
+//        }
+        
+//        endShape();
+       
+//      }
+//    }
+//  }}
