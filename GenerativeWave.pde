@@ -1,7 +1,5 @@
 import peasy.*;
 
-
-
 Cube b;
 
 
